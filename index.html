@@ -3,33 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <title>Smart Capas</title>
+
+<style>
+
+body{
+    background: linear-gradient(135deg,#111,#222);
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+.logo{
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+    color:#25D366;
+}
+
+.subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+h2,h3{
+    color:#333;
+}
+
+select,input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+.botao{
+    width:100%;
+    padding:15px;
+    background:#25D366;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.botao:hover{
+    background:#1fa855;
+}
+
+#resultado{
+    margin-top:20px;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>📱 Smart Capas</h1>
+<div class="container">
 
-<p>Digite o modelo do seu celular:</p>
+<div class="logo">
+📱 SMART CAPAS
+</div>
 
-<input type="text" id="modelo"
-placeholder="Ex: iPhone 15, Galaxy A35, Redmi Note 13">
+<p class="subtitulo">
+Capas para Apple, Samsung, Motorola, Xiaomi e Realme
+</p>
 
-<br><br>
+<h2>Qual o sistema do dispositivo?</h2>
 
-<button onclick="enviarWhats()">Fazer Pedido</button>
+<select id="sistema" onchange="mostrarCampos()">
+    <option value="">Selecione</option>
+    <option value="Apple">1 - Apple</option>
+    <option value="Android">2 - Android</option>
+</select>
+
+<div id="androidDiv" style="display:none;">
+
+<h3>Marca do dispositivo</h3>
+
+<select id="marca">
+    <option value="Samsung">1 - Samsung</option>
+    <option value="Motorola">2 - Motorola</option>
+    <option value="Xiaomi">3 - Xiaomi</option>
+    <option value="Realme">4 - Realme</option>
+</select>
+
+</div>
+
+<div id="modeloDiv" style="display:none;">
+
+<h3>Modelo do dispositivo</h3>
+
+<input type="text"
+id="modelo"
+placeholder="Ex: iPhone 15, Galaxy A35">
+
+</div>
+
+<button class="botao" onclick="mostrarValor()">
+Continuar
+</button>
+
+<div id="resultado"></div>
+
+</div>
 
 <script>
 
-function enviarWhats() {
+function mostrarCampos(){
 
-    let modelo = document.getElementById("modelo").value;
+let sistema =
+document.getElementById("sistema").value;
 
-    let mensagem =
-    "Olá! Quero uma capa para o modelo: " + modelo;
+document.getElementById("modeloDiv")
+.style.display="block";
 
-    window.open(
-    "https://wa.me/5575982952428?text=" +
-    encodeURIComponent(mensagem)
-    );
+if(sistema=="Android")
+document.getElementById("androidDiv")
+.style.display="block";
+
+else
+document.getElementById("androidDiv")
+.style.display="none";
+}
+
+function mostrarValor(){
+
+let sistema =
+document.getElementById("sistema").value;
+
+let valor =
+(sistema=="Apple") ? "R$ 20,00" : "R$ 15,00";
+
+document.getElementById("resultado").innerHTML=
+
+"<h3>Valor: "+valor+"</h3>"+
+"<p>Deseja prosseguir?</p>"+
+"<button class='botao' onclick='prosseguir()'>1 - Prosseguir</button><br><br>"+
+"<button class='botao' onclick='finalizar()'>2 - Finalizar</button>";
+
+}
+
+function prosseguir(){
+
+let sistema =
+document.getElementById("sistema").value;
+
+let modelo =
+document.getElementById("modelo").value;
+
+let mensagem="";
+
+if(sistema=="Apple"){
+
+mensagem=
+"Olá! Quero uma capa.%0A"+
+"Sistema: Apple%0A"+
+"Modelo: "+modelo+"%0A"+
+"Valor: R$ 20,00";
+
+}else{
+
+let marca =
+document.getElementById("marca").value;
+
+mensagem=
+"Olá! Quero uma capa.%0A"+
+"Sistema: Android%0A"+
+"Marca: "+marca+"%0A"+
+"Modelo: "+modelo+"%0A"+
+"Valor: R$ 15,00";
+}
+
+window.open(
+"https://wa.me/5575982952428?text="+mensagem
+);
+
+}
+
+function finalizar(){
+
+alert(
+"Obrigado por visitar a Smart Capas!"
+);
+
 }
 
 </script>

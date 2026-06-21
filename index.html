@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Smart Capas</title>
 </head>
 <body>
 
 <h1>📱 Smart Capas</h1>
 
-<h2>Capas para iPhone</h2>
-<p>iPhone 13, 14, 15 e 16 - R$ 20,00</p>
+<p>Digite o modelo do seu celular:</p>
 
-<h2>Capas para Samsung</h2>
-<p>Galaxy A15, A35 e S24 - R$ 15,00</p>
+<input type="text" id="modelo"
+placeholder="Ex: iPhone 15, Galaxy A35, Redmi Note 13">
 
-<h2>Capas para Motorola</h2>
-<p>Moto G54, G84 e Edge 50 - R$ 15,00</p>
+<br><br>
 
-<h2>Capas para Xiaomi</h2>
-<p>Redmi Note 13, Note 14 e POCO X7 - R$ 15,00</p>
+<button onclick="enviarWhats()">Fazer Pedido</button>
 
-<h2>Capas para Realme</h2>
-<p>Realme C65, Realme 12 e GT - R$ 15,00</p>
+<script>
 
-<p><strong>WhatsApp:</strong> (75) 98295-2428</p>
+function enviarWhats() {
+
+    let modelo = document.getElementById("modelo").value;
+
+    let mensagem =
+    "Olá! Quero uma capa para o modelo: " + modelo;
+
+    window.open(
+    "https://wa.me/5575982952428?text=" +
+    encodeURIComponent(mensagem)
+    );
+}
+
+</script>
 
 </body>
 </html>
